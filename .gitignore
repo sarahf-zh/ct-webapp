@@ -1,0 +1,41 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+caretranslate/node_modules
+caretranslate/.pnp
+caretranslate/.pnp.*
+caretranslate/.yarn/*
+caretranslate/!.yarn/patches
+caretranslate/!.yarn/plugins
+caretranslate/!.yarn/releases
+caretranslate/!.yarn/versions
+
+# testing
+caretranslate//coverage
+
+# next.js
+caretranslate//.next/
+caretranslate//out/
+
+# production
+caretranslate//build
+
+# misc
+caretranslate/.DS_Store
+caretranslate/*.pem
+
+# debug
+caretranslate/npm-debug.log*
+caretranslate/yarn-debug.log*
+caretranslate/yarn-error.log*
+caretranslate/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+caretranslate/.env*
+
+# vercel
+caretranslate/.vercel
+
+# typescript
+caretranslate/*.tsbuildinfo
+caretranslate/next-env.d.ts
