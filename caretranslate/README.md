@@ -335,26 +335,6 @@ npm run build
 - [Tailwind CSS Docs](https://tailwindcss.com/docs)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 
-## 🗺️ Roadmap
-
-### Version 1.1
-- [ ] User authentication
-- [ ] Enhanced voice features
-- [ ] Offline mode
-- [ ] Export functionality
-
-### Version 1.2
-- [ ] Healthcare provider dashboard
-- [ ] Multi-language UI
-- [ ] Advanced search
-- [ ] Analytics dashboard
-
-### Version 2.0
-- [ ] Native mobile apps
-- [ ] EMR integration
-- [ ] Telemedicine features
-- [ ] Enterprise features
-
 ## 📞 Support
 
 - **Documentation**: [View Docs](https://your-docs-url.com)
