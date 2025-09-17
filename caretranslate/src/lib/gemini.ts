@@ -149,7 +149,7 @@ export const generateKidsTranslation = async (
 ): Promise<string> => {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    
+
     const systemPrompt = `You are a pediatric communication specialist explaining medical concepts to children aged ${options.childAge} years.
 
 Use:

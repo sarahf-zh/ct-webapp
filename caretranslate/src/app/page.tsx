@@ -14,6 +14,12 @@ import {
   Search,
   User,
   X,
+  CheckCircle,
+  AlertTriangle,
+  Users,
+  MessageSquare,
+  Lightbulb,
+  HeartPulse,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useDictionary } from '@/hooks/useDictionary';
@@ -23,8 +29,8 @@ import { commonMedicalLanguages } from '@/lib/googleTranslate';
 interface DictionaryItem {
   id: string;
   term: string;
-  explanation?: string; // ✅ Made optional to support fallback
-  translation?: string; // ✅ Added old field for fallback
+  explanation?: string; // Made optional for fallback
+  translation?: string; // Added old field for fallback
   saved: string;
   complexity?: number;
   category: string;
@@ -54,6 +60,7 @@ const MemoizedTextarea = memo(
     />
   ),
 );
+MemoizedTextarea.displayName = 'MemoizedTextarea';
 
 const MemoizedSelect = memo(
   ({
@@ -72,6 +79,7 @@ const MemoizedSelect = memo(
     </select>
   ),
 );
+MemoizedSelect.displayName = 'MemoizedSelect';
 
 const MemoizedInput = memo(
   ({
@@ -96,6 +104,7 @@ const MemoizedInput = memo(
     />
   ),
 );
+MemoizedInput.displayName = 'MemoizedInput';
 
 // ✅ FIX 2: ModeCard component at module level
 const ModeCard = ({
@@ -134,6 +143,123 @@ const ModeCard = ({
     </p>
   </div>
 );
+
+// ✅ NEW: Header icon mapping
+const headerIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  'simplified term': BookOpen,
+  'everyday language explanation': MessageSquare,
+  analogy: Lightbulb,
+  'what you should know': CheckCircle,
+  'when to seek medical attention': AlertTriangle,
+  'cultural understanding': Globe,
+  'communication bridge': MessageSquare,
+  'family integration': Users,
+  'traditional + modern integration': HeartPulse,
+  'cultural advocacy': Users,
+  'common misunderstandings': Lightbulb,
+};
+
+// ✅ NEW: Component to render HTML result with icons
+const HtmlResultRenderer = memo(
+  ({ result, activeMode }: { result: string; activeMode: string }) => {
+    // Only apply special formatting for medical and cultural modes
+    if (activeMode !== 'medical' && activeMode !== 'cultural') {
+      // Use original rendering for other modes (like kids)
+      return (
+        <div className="prose prose-sm max-w-none whitespace-pre-line text-gray-800">
+          {result}
+        </div>
+      );
+    }
+
+    const lines = result.split('\n');
+
+    return (
+      <div className="space-y-2">
+        {lines.map((line, index) => {
+          // 1. Check for Headers
+          // Clean line: remove markdown (**, ##) and trim
+          const cleanedLine = line
+            .replace(/^(##\s*|\*\*\s*)/, '')
+            .replace(/\s*\*\*$/, '')
+            .trim();
+
+          // Find icon (case-insensitive, trim space, remove colon)
+          const Icon =
+            headerIcons[cleanedLine.toLowerCase().replace(/:$/, '').trim()];
+
+          if (Icon) {
+            return (
+              <div key={index} className="flex items-start space-x-2 pt-4">
+                <Icon
+                  className="w-5 h-5 text-blue-600 flex-shrink-0"
+                  style={{ marginTop: '0.125rem' }}
+                />
+                <h3 className="text-lg font-bold text-gray-900">
+                  {cleanedLine}
+                </h3>
+              </div>
+            );
+          }
+
+          // 2. Check for Empty Lines
+          if (line.trim() === '') {
+            return null;
+          }
+
+          // 3. Process Paragraphs/Bullets
+          let processedLine = line;
+          let isBullet = false;
+
+          // Check for bullet
+          if (processedLine.trim().startsWith('* ')) {
+            isBullet = true;
+            processedLine = processedLine.trim().substring(2).trim(); // Remove '* '
+          } else {
+            // Remove any other list-like markers if not a bullet
+            processedLine = processedLine
+              .replace(/^(##\s*|\*\*\s*)/, '')
+              .replace(/\s*\*\*$/, '')
+              .trim();
+          }
+
+          // Process **bold** and _italic_
+          // Use dangerouslySetInnerHTML for this
+          processedLine = processedLine
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/_(.*?)_/g, '<em>$1</em>');
+
+          if (isBullet) {
+            return (
+              <div key={index} className="flex items-start space-x-2 ml-4">
+                <span
+                  className="text-blue-600 flex-shrink-0"
+                  style={{ marginTop: '0.375rem' }}
+                >
+                  &bull;
+                </span>
+                <p
+                  className="leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: processedLine }}
+                />
+              </div>
+            );
+          }
+
+          // 4. Render as regular paragraph
+          return (
+            <p
+              key={index}
+              className="leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: processedLine }}
+            />
+          );
+        })}
+      </div>
+    );
+  },
+);
+HtmlResultRenderer.displayName = 'HtmlResultRenderer';
 
 // ✅ FIX 3: HomeView component at module level
 const HomeView = ({
@@ -339,9 +465,9 @@ const HomeView = ({
     {/* Result Section */}
     {result && (
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border-l-4 border-green-400 mb-20">
-        <div className="prose prose-sm max-w-none">
-          <div className="whitespace-pre-line text-gray-800">{result}</div>
-        </div>
+        {/* ✅ UPDATED: Renders the result using the new component */}
+        <HtmlResultRenderer result={result} activeMode={activeMode} />
+
         <div className="mt-4 flex space-x-2">
           {activeMode === 'medical' && (
             <button
@@ -420,7 +546,7 @@ const DictionaryView = ({
                     <h3 className="font-semibold text-gray-800 text-lg">
                       {item.term}
                     </h3>
-                    {/* ✅ FIX: Use fallback for robustness */}
+                    {/* ✅ UPDATED: Use fallback */}
                     <p className="text-gray-600 mt-1 leading-relaxed line-clamp-2">
                       {item.explanation || item.translation}
                     </p>
@@ -499,7 +625,7 @@ const TranslateView = ({
                 {lang.name} ({lang.nativeName})
               </option>
             ))}
-          </MemoizedSelect> {/* This closing tag was misspelled */}
+          </MemoizedSelect>
         </div>
 
         <div>
@@ -588,10 +714,16 @@ const DictionaryDetailModal = ({
             {item.complexity && <span>Complexity: {item.complexity}/5</span>}
             <span className="capitalize">{item.category}</span>
           </div>
-          {/* ✅ FIX: Use fallback for robustness */}
-          <div className="whitespace-pre-line text-gray-700 leading-relaxed">
-            {item.explanation || item.translation}
-          </div>
+          
+          {/* ✅✅✅ CHANGE IS HERE ✅✅✅
+            Replaced the simple <div> with HtmlResultRenderer.
+            We pass item.category (which is 'medical') as the 'activeMode' prop
+            to ensure the correct formatting is applied.
+          */}
+          <HtmlResultRenderer
+            result={item.explanation || item.translation || ''}
+            activeMode={item.category}
+          />
         </div>
 
         {/* Footer */}
@@ -607,6 +739,7 @@ const DictionaryDetailModal = ({
     </div>
   );
 };
+DictionaryDetailModal.displayName = 'DictionaryDetailModal';
 
 // ✅ Main CareTranslateApp component
 export default function CareTranslateApp() {
@@ -731,7 +864,8 @@ export default function CareTranslateApp() {
           response.detectedSourceLanguage || 'Unknown'
         }`,
       );
-    } catch (err) {
+    } catch (err)
+    {
       console.error('Language translation error:', err);
       setResult('Sorry, translation failed. Please try again.');
     }
@@ -739,14 +873,8 @@ export default function CareTranslateApp() {
 
   const handleSaveToDictionary = () => {
     if (input && result && activeMode === 'medical') {
-      // This passes the `result` as the explanation.
-      // Your useDictionary hook should save this as 'explanation'
-      saveToDictionary(
-        input,
-        result, 
-        'medical',
-        complexityLevel,
-      );
+      // The `saveToDictionary` hook will receive 'result' as the explanation
+      saveToDictionary(input, result, 'medical', complexityLevel);
       alert('Saved to your personal dictionary!');
     }
   };
@@ -796,7 +924,6 @@ export default function CareTranslateApp() {
     [],
   );
 
-  // This line was previously broken in your file, causing the syntax error
   const placeholder =
     placeholders[activeMode as keyof typeof placeholders] ||
     placeholders.medical;
