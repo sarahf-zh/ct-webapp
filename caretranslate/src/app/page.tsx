@@ -1,90 +1,111 @@
 'use client';
 
 import React, { useState, useCallback, useMemo, memo } from 'react';
-import { 
-  Mic, 
-  MicOff, 
-  Send, 
-  BookOpen, 
-  Globe, 
-  Baby, 
-  Home, 
+import {
+  Mic,
+  MicOff,
+  Send,
+  BookOpen,
+  Globe,
+  Baby,
+  Home,
   Save,
   Trash2,
   Search,
-  User
+  User,
+  X,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useDictionary } from '@/hooks/useDictionary';
 import { commonMedicalLanguages } from '@/lib/googleTranslate';
 
+// ✅ Interface for Dictionary Item
+interface DictionaryItem {
+  id: string;
+  term: string;
+  explanation?: string; // ✅ Made optional to support fallback
+  translation?: string; // ✅ Added old field for fallback
+  saved: string;
+  complexity?: number;
+  category: string;
+}
+
 // ✅ FIX 1: Memoized input components at module level
-const MemoizedTextarea = memo(({ 
-  value, 
-  onChange, 
-  placeholder, 
-  rows = 3,
-  className 
-}: {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder: string;
-  rows?: number;
-  className: string;
-}) => (
-  <textarea
-    className={className}
-    rows={rows}
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-  />
-));
+const MemoizedTextarea = memo(
+  ({
+    value,
+    onChange,
+    placeholder,
+    rows = 3,
+    className,
+  }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    placeholder: string;
+    rows?: number;
+    className: string;
+  }) => (
+    <textarea
+      className={className}
+      rows={rows}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
+  ),
+);
 
-const MemoizedSelect = memo(({ 
-  value, 
-  onChange, 
-  children,
-  className 
-}: {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  children: React.ReactNode;
-  className: string;
-}) => (
-  <select 
-    className={className}
-    value={value}
-    onChange={onChange}
-  >
-    {children}
-  </select>
-));
+const MemoizedSelect = memo(
+  ({
+    value,
+    onChange,
+    children,
+    className,
+  }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    children: React.ReactNode;
+    className: string;
+  }) => (
+    <select className={className} value={value} onChange={onChange}>
+      {children}
+    </select>
+  ),
+);
 
-const MemoizedInput = memo(({ 
-  value, 
-  onChange, 
-  placeholder,
-  className,
-  type = "text"
-}: {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  className: string;
-  type?: string;
-}) => (
-  <input
-    type={type}
-    className={className}
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-  />
-));
+const MemoizedInput = memo(
+  ({
+    value,
+    onChange,
+    placeholder,
+    className,
+    type = 'text',
+  }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    placeholder: string;
+    className: string;
+    type?: string;
+  }) => (
+    <input
+      type={type}
+      className={className}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
+  ),
+);
 
 // ✅ FIX 2: ModeCard component at module level
-const ModeCard = ({ mode, icon: Icon, title, description, isActive, onClick }: {
+const ModeCard = ({
+  mode,
+  icon: Icon,
+  title,
+  description,
+  isActive,
+  onClick,
+}: {
   mode: string;
   icon: React.ComponentType<{ className?: string }>;
   title: string;
@@ -92,21 +113,25 @@ const ModeCard = ({ mode, icon: Icon, title, description, isActive, onClick }: {
   isActive: boolean;
   onClick: () => void;
 }) => (
-  <div 
+  <div
     className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 ${
-      isActive 
-        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white transform scale-105 shadow-lg' 
+      isActive
+        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white transform scale-105 shadow-lg'
         : 'bg-white hover:bg-gray-50 border border-gray-200 hover:shadow-md'
     }`}
     onClick={onClick}
   >
-    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
-      isActive ? 'bg-white bg-opacity-20' : 'bg-blue-100'
-    }`}>
+    <div
+      className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+        isActive ? 'bg-white bg-opacity-20' : 'bg-blue-100'
+      }`}
+    >
       <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-blue-600'}`} />
     </div>
     <h3 className="font-semibold text-lg mb-2">{title}</h3>
-    <p className={`text-sm ${isActive ? 'text-blue-100' : 'text-gray-600'}`}>{description}</p>
+    <p className={`text-sm ${isActive ? 'text-blue-100' : 'text-gray-600'}`}>
+      {description}
+    </p>
   </div>
 );
 
@@ -129,12 +154,14 @@ const HomeView = ({
   isLoading,
   result,
   handleSaveToDictionary,
-  error
+  error,
 }: {
   activeMode: string;
   setActiveMode: (mode: string) => void;
   culturalBackground: string;
-  handleCulturalBackgroundChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleCulturalBackgroundChange: (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => void;
   childAge: string;
   handleChildAgeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   input: string;
@@ -193,12 +220,22 @@ const HomeView = ({
               onChange={handleCulturalBackgroundChange}
             >
               <option value="">Select your background</option>
-              <option value="East Asian">East Asian (Chinese, Japanese, Korean)</option>
-              <option value="South Asian">South Asian (Indian, Pakistani, Bangladeshi)</option>
-              <option value="Middle Eastern">Middle Eastern (Arab, Persian, Turkish)</option>
+              <option value="East Asian">
+                East Asian (Chinese, Japanese, Korean)
+              </option>
+              <option value="South Asian">
+                South Asian (Indian, Pakistani, Bangladeshi)
+              </option>
+              <option value="Middle Eastern">
+                Middle Eastern (Arab, Persian, Turkish)
+              </option>
               <option value="African">African (Various traditions)</option>
-              <option value="Latin American">Latin American (Hispanic/Latino)</option>
-              <option value="Indigenous">Indigenous (Native American, Aboriginal)</option>
+              <option value="Latin American">
+                Latin American (Hispanic/Latino)
+              </option>
+              <option value="Indigenous">
+                Indigenous (Native American, Aboriginal)
+              </option>
             </MemoizedSelect>
           </div>
         )}
@@ -224,9 +261,11 @@ const HomeView = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            {activeMode === 'medical' ? 'Medical term or description:' :
-             activeMode === 'cultural' ? 'Your health concern:' :
-             'Medical procedure or condition:'}
+            {activeMode === 'medical'
+              ? 'Medical term or description:'
+              : activeMode === 'cultural'
+                ? 'Your health concern:'
+                : 'Medical procedure or condition:'}
           </label>
           <div className="relative">
             <MemoizedTextarea
@@ -238,12 +277,18 @@ const HomeView = ({
             />
             <button
               className={`absolute right-3 top-3 p-1 rounded-full transition-colors ${
-                isListening ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                isListening
+                  ? 'bg-red-500 text-white'
+                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
               }`}
               onClick={toggleVoiceRecording}
               type="button"
             >
-              {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+              {isListening ? (
+                <MicOff className="w-4 h-4" />
+              ) : (
+                <Mic className="w-4 h-4" />
+              )}
             </button>
           </div>
         </div>
@@ -279,9 +324,11 @@ const HomeView = ({
             <>
               <Send className="w-4 h-4" />
               <span>
-                {activeMode === 'medical' ? 'Translate to Plain English' :
-                 activeMode === 'cultural' ? 'Get Cultural Context' :
-                 'Create Kid-Friendly Explanation'}
+                {activeMode === 'medical'
+                  ? 'Explain In Plain English'
+                  : activeMode === 'cultural'
+                    ? 'Get Cultural Context'
+                    : 'Create Kid-Friendly Explanation'}
               </span>
             </>
           )}
@@ -293,13 +340,11 @@ const HomeView = ({
     {result && (
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border-l-4 border-green-400 mb-20">
         <div className="prose prose-sm max-w-none">
-          <div className="whitespace-pre-line text-gray-800">
-            {result}
-          </div>
+          <div className="whitespace-pre-line text-gray-800">{result}</div>
         </div>
         <div className="mt-4 flex space-x-2">
           {activeMode === 'medical' && (
-            <button 
+            <button
               onClick={handleSaveToDictionary}
               className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 flex items-center space-x-1"
             >
@@ -328,16 +373,20 @@ const DictionaryView = ({
   handleSearchQueryChange,
   dictionary,
   searchDictionary,
-  removeFromDictionary
+  removeFromDictionary,
+  handleShowDetails,
 }: {
   searchQuery: string;
   handleSearchQueryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  dictionary: any[];
-  searchDictionary: (query: string) => any[];
+  dictionary: DictionaryItem[];
+  searchDictionary: (query: string) => DictionaryItem[];
   removeFromDictionary: (id: string) => void;
+  handleShowDetails: (item: DictionaryItem) => void;
 }) => {
-  const filteredDictionary = searchQuery ? searchDictionary(searchQuery) : dictionary;
-  
+  const filteredDictionary = searchQuery
+    ? searchDictionary(searchQuery)
+    : dictionary;
+
   return (
     <div className="space-y-6 pb-20">
       <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
@@ -345,7 +394,7 @@ const DictionaryView = ({
           <BookOpen className="w-6 h-6" />
           <span>Your Personal Medical Dictionary</span>
         </h2>
-        
+
         {/* Search */}
         <div className="relative mb-4">
           <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
@@ -361,19 +410,33 @@ const DictionaryView = ({
         <div className="space-y-4">
           {filteredDictionary.length > 0 ? (
             filteredDictionary.map((item) => (
-              <div key={item.id} className="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50 rounded-r-lg">
+              <div
+                key={item.id}
+                className="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50 rounded-r-lg cursor-pointer hover:bg-gray-100 transition-colors"
+                onClick={() => handleShowDetails(item)}
+              >
                 <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800 text-lg">{item.term}</h3>
-                    <p className="text-gray-600 mt-1 leading-relaxed">{item.translation}</p>
+                  <div className="flex-1 pr-4">
+                    <h3 className="font-semibold text-gray-800 text-lg">
+                      {item.term}
+                    </h3>
+                    {/* ✅ FIX: Use fallback for robustness */}
+                    <p className="text-gray-600 mt-1 leading-relaxed line-clamp-2">
+                      {item.explanation || item.translation}
+                    </p>
                     <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
                       <span>Saved {item.saved}</span>
-                      {item.complexity && <span>Complexity: {item.complexity}/5</span>}
+                      {item.complexity && (
+                        <span>Complexity: {item.complexity}/5</span>
+                      )}
                       <span className="capitalize">{item.category}</span>
                     </div>
                   </div>
                   <button
-                    onClick={() => removeFromDictionary(item.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeFromDictionary(item.id);
+                    }}
                     className="ml-4 p-1 text-red-500 hover:text-red-700"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -383,7 +446,9 @@ const DictionaryView = ({
             ))
           ) : (
             <p className="text-gray-500 text-center py-8 italic">
-              {searchQuery ? 'No matching terms found.' : 'No saved terms yet. Start translating medical terms to build your dictionary!'}
+              {searchQuery
+                ? 'No matching terms found.'
+                : 'No saved terms yet. Start translating medical terms to build your dictionary!'}
             </p>
           )}
         </div>
@@ -401,7 +466,7 @@ const TranslateView = ({
   handleLanguageTranslate,
   isLoading,
   result,
-  error
+  error,
 }: {
   targetLanguage: string;
   handleTargetLanguageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -418,7 +483,7 @@ const TranslateView = ({
         <Globe className="w-6 h-6" />
         <span>Real-time Medical Translation</span>
       </h2>
-      
+
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -434,7 +499,7 @@ const TranslateView = ({
                 {lang.name} ({lang.nativeName})
               </option>
             ))}
-          </MemoizedSelect>
+          </MemoizedSelect> {/* This closing tag was misspelled */}
         </div>
 
         <div>
@@ -468,7 +533,9 @@ const TranslateView = ({
 
       {result && (
         <div className="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-6 border-l-4 border-green-400 mt-6">
-          <h3 className="font-semibold text-green-800 mb-3">Translation Result:</h3>
+          <h3 className="font-semibold text-green-800 mb-3">
+            Translation Result:
+          </h3>
           <div className="whitespace-pre-line text-gray-800 leading-relaxed">
             {result}
           </div>
@@ -484,6 +551,63 @@ const TranslateView = ({
   </div>
 );
 
+// ✅ NEW: DictionaryDetailModal component
+const DictionaryDetailModal = ({
+  item,
+  onClose,
+}: {
+  item: DictionaryItem;
+  onClose: () => void;
+}) => {
+  return (
+    // Backdrop
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      {/* Modal Panel */}
+      <div
+        className="bg-white rounded-2xl shadow-xl w-full max-w-lg m-4 max-h-[80vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center p-6 border-b">
+          <h2 className="text-xl font-bold text-gray-800">{item.term}</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Content (Scrollable) */}
+        <div className="p-6 overflow-y-auto">
+          <div className="flex items-center space-x-4 mb-4 text-sm text-gray-500">
+            <span>Saved {item.saved}</span>
+            {item.complexity && <span>Complexity: {item.complexity}/5</span>}
+            <span className="capitalize">{item.category}</span>
+          </div>
+          {/* ✅ FIX: Use fallback for robustness */}
+          <div className="whitespace-pre-line text-gray-700 leading-relaxed">
+            {item.explanation || item.translation}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 bg-gray-50 border-t rounded-b-2xl">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ✅ Main CareTranslateApp component
 export default function CareTranslateApp() {
   const [activeTab, setActiveTab] = useState('home');
@@ -496,54 +620,82 @@ export default function CareTranslateApp() {
   const [childAge, setChildAge] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('es');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDictionaryItem, setSelectedDictionaryItem] =
+    useState<DictionaryItem | null>(null);
 
-  const { 
-    translateMedical, 
-    translateCultural, 
-    translateKids, 
-    translateLanguage, 
-    isLoading, 
-    error 
+  const {
+    translateMedical,
+    translateCultural,
+    translateKids,
+    translateLanguage,
+    isLoading,
+    error,
   } = useTranslation();
 
-  const { 
-    dictionary, 
-    saveToDictionary, 
-    removeFromDictionary, 
-    searchDictionary 
+  const {
+    dictionary,
+    saveToDictionary,
+    removeFromDictionary,
+    searchDictionary,
   } = useDictionary();
 
   // Stable event handlers
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(e.target.value);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setInput(e.target.value);
+    },
+    [],
+  );
+
+  const handleCulturalBackgroundChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setCulturalBackground(e.target.value);
+    },
+    [],
+  );
+
+  const handleChildAgeChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setChildAge(e.target.value);
+    },
+    [],
+  );
+
+  const handleComplexityChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setComplexityLevel(Number(e.target.value));
+    },
+    [],
+  );
+
+  const handleTargetLanguageChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setTargetLanguage(e.target.value);
+    },
+    [],
+  );
+
+  const handleSearchQueryChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchQuery(e.target.value);
+    },
+    [],
+  );
+
+  const handleShowDetails = useCallback((item: DictionaryItem) => {
+    setSelectedDictionaryItem(item);
   }, []);
 
-  const handleCulturalBackgroundChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCulturalBackground(e.target.value);
-  }, []);
-
-  const handleChildAgeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setChildAge(e.target.value);
-  }, []);
-
-  const handleComplexityChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setComplexityLevel(Number(e.target.value));
-  }, []);
-
-  const handleTargetLanguageChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTargetLanguage(e.target.value);
-  }, []);
-
-  const handleSearchQueryChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleCloseDetails = useCallback(() => {
+    setSelectedDictionaryItem(null);
   }, []);
 
   const handleSubmit = async () => {
     if (!input.trim()) return;
-    
+
     try {
       let response = '';
-      
+
       if (activeMode === 'medical') {
         response = await translateMedical(input, { complexityLevel });
       } else if (activeMode === 'cultural') {
@@ -554,12 +706,12 @@ export default function CareTranslateApp() {
         response = await translateCultural(input, { culturalBackground });
       } else if (activeMode === 'kids') {
         if (!childAge) {
-          setResult('Please select the child\'s age first.');
+          setResult("Please select the child's age first.");
           return;
         }
         response = await translateKids(input, { childAge });
       }
-      
+
       setResult(response);
     } catch (err) {
       console.error('Translation error:', err);
@@ -569,10 +721,16 @@ export default function CareTranslateApp() {
 
   const handleLanguageTranslate = async () => {
     if (!input.trim()) return;
-    
+
     try {
       const response = await translateLanguage(input, { targetLanguage });
-      setResult(`Original: ${input}\n\nTranslated: ${response.translatedText}\n\nDetected source language: ${response.detectedSourceLanguage || 'Unknown'}`);
+      setResult(
+        `Original: ${input}\n\nTranslated: ${
+          response.translatedText
+        }\n\nDetected source language: ${
+          response.detectedSourceLanguage || 'Unknown'
+        }`,
+      );
     } catch (err) {
       console.error('Language translation error:', err);
       setResult('Sorry, translation failed. Please try again.');
@@ -581,11 +739,13 @@ export default function CareTranslateApp() {
 
   const handleSaveToDictionary = () => {
     if (input && result && activeMode === 'medical') {
+      // This passes the `result` as the explanation.
+      // Your useDictionary hook should save this as 'explanation'
       saveToDictionary(
         input,
-        result.split('\n')[0] || result.substring(0, 100) + '...',
+        result, 
         'medical',
-        complexityLevel
+        complexityLevel,
       );
       alert('Saved to your personal dictionary!');
     }
@@ -593,26 +753,28 @@ export default function CareTranslateApp() {
 
   const toggleVoiceRecording = useCallback(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const SpeechRecognition =
+        (window as any).SpeechRecognition ||
+        (window as any).webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
-      
+
       recognition.continuous = false;
       recognition.interimResults = false;
       recognition.lang = 'en-US';
-      
+
       recognition.onstart = () => setIsListening(true);
       recognition.onend = () => setIsListening(false);
-      
+
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
-        setInput(prev => prev + ' ' + transcript);
+        setInput((prev) => prev + ' ' + transcript);
       };
-      
+
       recognition.onerror = (event: any) => {
         console.error('Speech recognition error:', event.error);
         setIsListening(false);
       };
-      
+
       if (!isListening) {
         recognition.start();
       } else {
@@ -625,13 +787,19 @@ export default function CareTranslateApp() {
   }, [isListening]);
 
   // Stable placeholder values
-  const placeholders = useMemo(() => ({
-    medical: 'e.g., Myocardial infarction, Hypertension',
-    cultural: 'Describe your symptoms or questions...',
-    kids: 'e.g., Getting a vaccine shot'
-  }), []);
+  const placeholders = useMemo(
+    () => ({
+      medical: 'e.g., Myocardial infarction, Hypertension',
+      cultural: 'Describe your symptoms or questions...',
+      kids: 'e.g., Getting a vaccine shot',
+    }),
+    [],
+  );
 
-  const placeholder = placeholders[activeMode as keyof typeof placeholders] || placeholders.medical;
+  // This line was previously broken in your file, causing the syntax error
+  const placeholder =
+    placeholders[activeMode as keyof typeof placeholders] ||
+    placeholders.medical;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -643,7 +811,9 @@ export default function CareTranslateApp() {
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 CareTranslate
               </h1>
-              <p className="text-gray-600 text-sm">Breaking down healthcare communication barriers</p>
+              <p className="text-gray-600 text-sm">
+                Breaking down healthcare communication barriers
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <User className="w-8 h-8 text-gray-400" />
@@ -683,6 +853,7 @@ export default function CareTranslateApp() {
             dictionary={dictionary}
             searchDictionary={searchDictionary}
             removeFromDictionary={removeFromDictionary}
+            handleShowDetails={handleShowDetails}
           />
         )}
         {activeTab === 'translate' && (
@@ -706,12 +877,14 @@ export default function CareTranslateApp() {
             {[
               { id: 'home', icon: Home, label: 'Home' },
               { id: 'dictionary', icon: BookOpen, label: 'Dictionary' },
-              { id: 'translate', icon: Globe, label: 'Translate' }
+              { id: 'translate', icon: Globe, label: 'Translate' },
             ].map((item) => (
-              <div 
+              <div
                 key={item.id}
                 className={`flex flex-col items-center space-y-1 cursor-pointer px-4 py-2 rounded-lg transition-colors ${
-                  activeTab === item.id ? 'text-blue-600 bg-blue-50' : 'text-gray-400 hover:text-gray-600'
+                  activeTab === item.id
+                    ? 'text-blue-600 bg-blue-50'
+                    : 'text-gray-400 hover:text-gray-600'
                 }`}
                 onClick={() => setActiveTab(item.id)}
               >
@@ -722,6 +895,14 @@ export default function CareTranslateApp() {
           </div>
         </div>
       </nav>
+
+      {/* Render modal conditionally */}
+      {selectedDictionaryItem && (
+        <DictionaryDetailModal
+          item={selectedDictionaryItem}
+          onClose={handleCloseDetails}
+        />
+      )}
     </div>
   );
 }
