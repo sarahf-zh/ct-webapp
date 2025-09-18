@@ -54,7 +54,14 @@ export const translateText = async (
     
   } catch (error) {
     console.error('Google Translate Error:', error);
-    throw new Error(`Translation failed: ${error.message}`);
+    
+    // Check if it's an Error object
+    if (error instanceof Error) {
+      throw new Error(`Translation failed: ${error.message}`);
+    }
+    
+    // Fallback for other error types
+    throw new Error('Translation failed: Unknown error');
   }
 };
 

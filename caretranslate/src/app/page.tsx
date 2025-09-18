@@ -192,8 +192,8 @@ const HtmlResultRenderer = memo(
             return (
               <div key={index} className="flex items-start space-x-2 pt-4">
                 <Icon
-                  className="w-5 h-5 text-blue-600 flex-shrink-0"
-                  style={{ marginTop: '0.125rem' }}
+                  className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                  //style={{ marginTop: '0.125rem' }}
                 />
                 <h3 className="text-lg font-bold text-gray-900">
                   {cleanedLine}

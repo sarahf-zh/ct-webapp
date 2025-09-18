@@ -25,8 +25,17 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     console.error('Language translation error:', error);
+    
+    // Default error message
+    let errorMessage = 'Language translation failed';
+
+    // Check if it's an Error object
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
     return NextResponse.json(
-      { error: error.message || 'Language translation failed' },
+      { error: errorMessage }, // Use the safe error message
       { status: 500 }
     );
   }

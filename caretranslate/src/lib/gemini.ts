@@ -139,7 +139,13 @@ Be specific to ${options.culturalBackground} culture - use actual cultural terms
     
   } catch (error) {
     console.error('Cultural Gemini API Error:', error);
-    throw new Error(`Failed to generate culturally-aware response: ${error.message}`);
+    // Check the type of error
+    if (error instanceof Error) {
+      throw new Error(`Failed to generate culturally-aware response: ${error.message}`);
+    }
+    
+    // Handle cases where error is not an Error object
+    throw new Error(`Failed to generate culturally-aware response: Unknown error`);
   }
 };
 
