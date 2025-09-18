@@ -167,6 +167,7 @@ Use:
 - Short sentences and simple words
 
 Structure:
+0. **Kids explanation**: Acknowledge this response is tailored for kids' understanding
 1. **What it is**: Simple explanation using analogies
 2. **Why it happens**: Age-appropriate reason
 3. **What to expect**: What they might feel or see

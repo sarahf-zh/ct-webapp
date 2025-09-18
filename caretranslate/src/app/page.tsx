@@ -469,7 +469,6 @@ const HomeView = ({
         <HtmlResultRenderer result={result} activeMode={activeMode} />
 
         <div className="mt-4 flex space-x-2">
-          {activeMode === 'medical' && (
             <button
               onClick={handleSaveToDictionary}
               className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 flex items-center space-x-1"
@@ -477,7 +476,7 @@ const HomeView = ({
               <Save className="w-4 h-4" />
               <span>Save to Dictionary</span>
             </button>
-          )}
+          
           <button className="px-4 py-2 bg-white text-gray-700 rounded-lg text-sm hover:bg-gray-50 border">
             Share
           </button>
@@ -552,7 +551,7 @@ const DictionaryView = ({
                     </p>
                     <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
                       <span>Saved {item.saved}</span>
-                      {item.complexity && (
+                      {item.complexity && item.category === 'medical' && (
                         <span>Complexity: {item.complexity}/5</span>
                       )}
                       <span className="capitalize">{item.category}</span>
@@ -711,7 +710,9 @@ const DictionaryDetailModal = ({
         <div className="p-6 overflow-y-auto">
           <div className="flex items-center space-x-4 mb-4 text-sm text-gray-500">
             <span>Saved {item.saved}</span>
-            {item.complexity && <span>Complexity: {item.complexity}/5</span>}
+            {item.complexity && item.category === 'medical' && (
+              <span>Complexity: {item.complexity}/5</span>
+            )}
             <span className="capitalize">{item.category}</span>
           </div>
           
@@ -872,11 +873,11 @@ export default function CareTranslateApp() {
   };
 
   const handleSaveToDictionary = () => {
-    if (input && result && activeMode === 'medical') {
+    //if (input && result && activeMode === 'medical') {
       // The `saveToDictionary` hook will receive 'result' as the explanation
-      saveToDictionary(input, result, 'medical', complexityLevel);
+      saveToDictionary(input, result, activeMode, complexityLevel);
       alert('Saved to your personal dictionary!');
-    }
+    //}
   };
 
   const toggleVoiceRecording = useCallback(() => {
