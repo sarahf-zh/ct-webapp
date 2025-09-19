@@ -6,6 +6,7 @@ import {
   MicOff,
   Send,
   BookOpen,
+  BookMarked,
   Globe,
   Globe2,
   Baby,
@@ -517,7 +518,7 @@ const DictionaryView = ({
     <div className="space-y-6 pb-20">
       <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
         <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center space-x-2">
-          <BookOpen className="w-6 h-6" />
+          <BookMarked className="w-6 h-6" />
           <span>Your Personal Medical Dictionary</span>
         </h2>
 
@@ -1005,7 +1006,7 @@ export default function CareTranslateApp() {
           <div className="flex justify-around py-3">
             {[
               { id: 'home', icon: Home, label: 'Home' },
-              { id: 'dictionary', icon: BookOpen, label: 'Dictionary' },
+              { id: 'dictionary', icon: BookMarked, label: 'Dictionary' },
               { id: 'translate', icon: Globe, label: 'Translate' },
             ].map((item) => (
               <div
