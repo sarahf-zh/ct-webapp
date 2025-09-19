@@ -7,6 +7,7 @@ import {
   Send,
   BookOpen,
   Globe,
+  Globe2,
   Baby,
   Home,
   Save,
@@ -151,7 +152,7 @@ const headerIcons: Record<string, React.ComponentType<{ className?: string }>> =
   analogy: Lightbulb,
   'what you should know': CheckCircle,
   'when to seek medical attention': AlertTriangle,
-  'cultural understanding': Globe,
+  'cultural understanding': Globe2,
   'communication bridge': MessageSquare,
   'family integration': Users,
   'traditional + modern integration': HeartPulse,
@@ -316,7 +317,7 @@ const HomeView = ({
       />
       <ModeCard
         mode="cultural"
-        icon={Globe}
+        icon={Globe2}
         title="Cultural Bridge"
         description="Navigate cultural differences in healthcare communication"
         isActive={activeMode === 'cultural'}
