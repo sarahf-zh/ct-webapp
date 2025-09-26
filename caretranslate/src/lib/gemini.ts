@@ -1,6 +1,12 @@
 // src/lib/gemini.ts
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+//import { GoogleGenerativeAI } from "@google-cloud/vertexai";
+/*const genAI = new GoogleGenerativeAI({
+  project: process.env.GOOGLE_CLOUD_PROJECT_ID || '', // Your Google Cloud Project ID
+  location: 'us-central1',                            // Your project's region
+});*/
+
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY!);
 
 export interface MedicalTranslationOptions {
@@ -66,8 +72,9 @@ export const generateMedicalTranslation = async (
   options: MedicalTranslationOptions
 ): Promise<string> => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    
+    //const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
     const systemPrompt = `You are a medical translator that converts complex medical terminology into plain English. 
     Complexity level: ${options.complexityLevel}/5 (1=very simple, 5=very detailed).
     
@@ -98,7 +105,8 @@ export const generateCulturalTranslation = async (
   options: CulturalTranslationOptions
 ): Promise<string> => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    //const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     
     const culturalContext = culturalContexts[options.culturalBackground];
     
@@ -154,7 +162,8 @@ export const generateKidsTranslation = async (
   options: KidsTranslationOptions
 ): Promise<string> => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    //const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     const systemPrompt = `You are a pediatric communication specialist explaining medical concepts to children aged ${options.childAge} years.
 
