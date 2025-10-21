@@ -81,11 +81,22 @@ export const generateMedicalTranslation = async (
     Format your response with clear headings and bullet points when appropriate.
     Be encouraging and reduce medical anxiety while being accurate.`;
     
-    const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash-lite',
+    
+    /*const model = genAI.getGenerativeModel({ 
+      model: 'gemini-2.5-flash',
       systemInstruction: {
         parts: [{ text: systemPrompt }]
       },
+      generationConfig: {
+        // Set a token limit (e.g., 500 tokens is ~375 words)
+        maxOutputTokens: 650
+      }
+    });*/
+
+    
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-2.5-flash-lite',
+      systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
         maxOutputTokens: 600
@@ -141,12 +152,10 @@ Be specific to ${options.culturalBackground} culture - use actual cultural terms
 
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.5-flash-lite',
-      systemInstruction: {
-        parts: [{ text: systemPrompt }]
-      },
+      systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
-        maxOutputTokens: 650
+        maxOutputTokens: 600
       }
     });
     const result = await model.generateContent(prompt);
@@ -195,9 +204,7 @@ Make it educational but not scary. Focus on the helpers (doctors, nurses) and ho
 
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.5-flash-lite',
-      systemInstruction: {
-        parts: [{ text: systemPrompt }]
-      },
+      systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
         maxOutputTokens: 600
