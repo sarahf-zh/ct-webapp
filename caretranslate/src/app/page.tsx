@@ -27,7 +27,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useDictionary } from '@/hooks/useDictionary';
 import { commonMedicalLanguages } from '@/lib/googleTranslate';
 
-// ✅ Interface for Dictionary Item
+// Interface for Dictionary Item
 interface DictionaryItem {
   id: string;
   term: string;
@@ -38,7 +38,6 @@ interface DictionaryItem {
   category: string;
 }
 
-// ✅ FIX 1: Memoized input components at module level
 const MemoizedTextarea = memo(
   ({
     value,
@@ -108,7 +107,6 @@ const MemoizedInput = memo(
 );
 MemoizedInput.displayName = 'MemoizedInput';
 
-// ✅ FIX 2: ModeCard component at module level
 const ModeCard = ({
   mode,
   icon: Icon,
@@ -146,7 +144,7 @@ const ModeCard = ({
   </div>
 );
 
-// ✅ NEW: Header icon mapping
+// NEW: Header icon mapping
 const headerIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'simplified term': BookOpen,
   'everyday language explanation': MessageSquare,
@@ -161,7 +159,7 @@ const headerIcons: Record<string, React.ComponentType<{ className?: string }>> =
   'common misunderstandings': Lightbulb,
 };
 
-// ✅ NEW: Component to render HTML result with icons
+// NEW: Component to render HTML result with icons
 const HtmlResultRenderer = memo(
   ({ result, activeMode }: { result: string; activeMode: string }) => {
     // Only apply special formatting for medical and cultural modes
@@ -263,7 +261,6 @@ const HtmlResultRenderer = memo(
 );
 HtmlResultRenderer.displayName = 'HtmlResultRenderer';
 
-// ✅ FIX 3: HomeView component at module level
 const HomeView = ({
   activeMode,
   setActiveMode,
@@ -467,7 +464,7 @@ const HomeView = ({
     {/* Result Section */}
     {result && (
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border-l-4 border-green-400 mb-20">
-        {/* ✅ UPDATED: Renders the result using the new component */}
+        {/* UPDATED: Renders the result using the new component */}
         <HtmlResultRenderer result={result} activeMode={activeMode} />
 
         <div className="mt-4 flex space-x-2">
@@ -494,7 +491,6 @@ const HomeView = ({
   </>
 );
 
-// ✅ FIX 4: DictionaryView component at module level
 const DictionaryView = ({
   searchQuery,
   handleSearchQueryChange,
@@ -547,7 +543,7 @@ const DictionaryView = ({
                     <h3 className="font-semibold text-gray-800 text-lg">
                       {item.term}
                     </h3>
-                    {/* ✅ UPDATED: Use fallback */}
+                    {/* UPDATED: Use fallback */}
                     <p className="text-gray-600 mt-1 leading-relaxed line-clamp-2">
                       {item.explanation || item.translation}
                     </p>
@@ -584,7 +580,6 @@ const DictionaryView = ({
   );
 };
 
-// ✅ FIX 5: TranslateView component at module level
 const TranslateView = ({
   targetLanguage,
   handleTargetLanguageChange,
@@ -678,7 +673,7 @@ const TranslateView = ({
   </div>
 );
 
-// ✅ NEW: DictionaryDetailModal component
+// NEW: DictionaryDetailModal component
 const DictionaryDetailModal = ({
   item,
   onClose,
@@ -718,7 +713,7 @@ const DictionaryDetailModal = ({
             <span className="capitalize">{item.category}</span>
           </div>
           
-          {/* ✅✅✅ CHANGE IS HERE ✅✅✅
+          {/*
             Replaced the simple <div> with HtmlResultRenderer.
             We pass item.category (which is 'medical') as the 'activeMode' prop
             to ensure the correct formatting is applied.
@@ -744,7 +739,7 @@ const DictionaryDetailModal = ({
 };
 DictionaryDetailModal.displayName = 'DictionaryDetailModal';
 
-// ✅ Main CareTranslateApp component
+// Main CareTranslateApp component
 export default function CareTranslateApp() {
   const [activeTab, setActiveTab] = useState('home');
   const [activeMode, setActiveMode] = useState('medical');
@@ -920,7 +915,7 @@ export default function CareTranslateApp() {
   // Stable placeholder values
   const placeholders = useMemo(
     () => ({
-      medical: 'e.g., Myocardial infarction, Hypertension',
+      medical: 'e.g., Myocardial infarction, Gastroenteritis',
       cultural: 'Describe your symptoms or questions...',
       kids: 'e.g., Getting a vaccine shot',
     }),
