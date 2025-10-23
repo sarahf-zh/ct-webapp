@@ -2,9 +2,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY!,
-  { apiClient: 'v1' }
-);
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY!);
 
 export interface MedicalTranslationOptions {
   complexityLevel: number;
