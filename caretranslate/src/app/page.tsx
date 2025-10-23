@@ -131,11 +131,13 @@ const ModeCard = ({
     onClick={onClick}
   >
     <div
-      className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+      // UPDATED: Increased container size to fit the larger icon
+      className={`w-16 h-16 rounded-xl flex items-center justify-center mb-4 ${
         isActive ? 'bg-white bg-opacity-20' : 'bg-blue-100'
       }`}
     >
-      <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-blue-600'}`} />
+      {/* UPDATED: Increased icon size */}
+      <Icon className={`w-8 h-8 ${isActive ? 'text-white' : 'text-blue-600'}`} />
     </div>
     <h3 className="font-semibold text-lg mb-2">{title}</h3>
     <p className={`text-sm ${isActive ? 'text-blue-100' : 'text-gray-600'}`}>
@@ -336,7 +338,7 @@ const HomeView = ({
       <div className="space-y-4">
         {activeMode === 'cultural' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Your cultural background:
             </label>
             <MemoizedSelect
@@ -367,7 +369,7 @@ const HomeView = ({
 
         {activeMode === 'kids' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Child's age:
             </label>
             <MemoizedSelect
@@ -385,7 +387,7 @@ const HomeView = ({
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
             {activeMode === 'medical'
               ? 'Medical term or description:'
               : activeMode === 'cultural'
@@ -420,7 +422,7 @@ const HomeView = ({
 
         {activeMode === 'medical' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Explanation complexity: {complexityLevel}/5
             </label>
             <input

@@ -2,7 +2,9 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY!);
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY!,
+  { apiClient: 'v1' }
+);
 
 export interface MedicalTranslationOptions {
   complexityLevel: number;
@@ -82,18 +84,6 @@ export const generateMedicalTranslation = async (
     Be encouraging and reduce medical anxiety while being accurate.`;
     
     
-    /*const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash',
-      systemInstruction: {
-        parts: [{ text: systemPrompt }]
-      },
-      generationConfig: {
-        // Set a token limit (e.g., 500 tokens is ~375 words)
-        maxOutputTokens: 650
-      }
-    });*/
-
-    
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.5-flash-lite',
       systemInstruction: systemPrompt,
@@ -104,7 +94,6 @@ export const generateMedicalTranslation = async (
     });
     const result = await model.generateContent(prompt);
 
-    
     const response = await result.response;
     return response.text();
 
@@ -155,7 +144,7 @@ Be specific to ${options.culturalBackground} culture - use actual cultural terms
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
-        maxOutputTokens: 600
+        maxOutputTokens: 650
       }
     });
     const result = await model.generateContent(prompt);
