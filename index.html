@@ -46,14 +46,17 @@
             padding: 20px;
         }
 
-        /* --- HEADER & HERO --- */
+        /* --- HEADER & HERO (Updated) --- */
         header {
-            background: var(--new-gradient);
-            padding: 50px 0;
+            /* Replaced Gradient with New Image */
+            background: url('https://raw.githubusercontent.com/sarahf-zh/ct-webapp/main/images/plain_header.png') no-repeat center center;
+            background-size: cover;
+            padding: 60px 0;
             text-align: center;
             margin-bottom: 40px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            /* Changed text color to dark because background is light */
+            color: #1e3a8a; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .header-content {
@@ -72,23 +75,28 @@
             background: white;
             border-radius: 12px;
             padding: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         h1.site-title {
             font-size: 3em;
             margin: 15px 0 5px 0;
-            color: white;
+            /* Apply gradient to text instead of white color */
+            background: var(--new-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-weight: 800;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            /* Removed shadow for cleaner look on light bg */
+            text-shadow: none;
         }
 
         p.tagline {
             font-size: 1.3em;
-            color: rgba(255, 255, 255, 0.95);
+            /* Darker gray/blue for readability on light sky */
+            color: #475569; 
             margin: 0;
             max-width: 600px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         /* --- CARD STYLING --- */
@@ -144,22 +152,25 @@
             text-decoration: underline;
         }
 
+        /* Updated Button for Light Background */
         .btn-demo {
             display: inline-block;
-            background: white;
-            color: #667eea !important;
+            /* Purple Gradient Background */
+            background: var(--new-gradient); 
+            /* White Text */
+            color: white !important; 
             padding: 12px 28px;
             border-radius: 30px;
             text-decoration: none !important;
             font-weight: bold;
             margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .btn-demo:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-            background: #f8fafc;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.6);
+            opacity: 0.95;
         }
 
         /* --- LAYOUTS --- */
@@ -288,10 +299,12 @@
     <header>
         <div class="header-content">
             <img src="https://raw.githubusercontent.com/sarahf-zh/ct-webapp/main/images/applogo.png" alt="CareTranslate Logo" class="logo">
+            
             <div>
                 <h1 class="site-title">CareTranslate</h1>
-                <p class="tagline"> Leverage AI to bridge communication gaps and make healthcare truly accessible.</p>
+                <p class="tagline">Leverage AI to bridge communication gaps and make healthcare truly accessible.</p>
             </div>
+            
             <a href="https://youtu.be/QdNo4heb6e8" target="_blank" class="btn-demo">▶ Watch Demo Video</a>
         </div>
     </header>
@@ -324,15 +337,15 @@
             <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;" class="stats-container">
                 <div class="stat-box">
                     <span class="stat-number">$1.7B</span>
-                    <span class="stat-label">In Malpractice Costs</span>
+                    <span class="stat-label"><b>In Malpractice Costs</b></span>
                 </div>
                 <div class="stat-box">
                     <span class="stat-number">2,000</span>
-                    <span class="stat-label">Preventable Deaths</span>
+                    <span class="stat-label"><b>Preventable Deaths</b></span>
                 </div>
                 <div class="stat-box">
                     <span class="stat-number">70%</span>
-                    <span class="stat-label">Of Serious Errors</span>
+                    <span class="stat-label"><b>Of Serious Errors</b></span>
                 </div>
             </div>
             
