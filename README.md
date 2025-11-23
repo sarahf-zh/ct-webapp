@@ -15,7 +15,7 @@
 **CareTranslate** is an innovative web platform that uses Generative AI to act as a crucial communication bridge in healthcare. My core mission is to establish a new depth of understanding between patients and providers, rather than just developing a new drug. The app utilizes **Google's Gemini AI** for deep contextual understanding and the **Google Translate API** for precise language translation. The technology dynamically adjusts its output persona based on the specific audience—whether that audience is a patient, a provider, or a child.
 
 <div align="center">
-  <img src="/images/Main_UI1.png" alt="CareTranslate Main UI" width="800">
+  <img src="/images/Main_UI1.png" alt="CareTranslate Main UI" width="400">
 </div>
 
 ### 💡 The Inspiration & The Problem
@@ -25,9 +25,6 @@ I realized that a healthcare system cannot genuinely care for its patients if it
 * **Error Rate:** **70% of Serious Medical Errors** (including medical jargon and misunderstandings) stem from communication failure.
 
 CareTranslate was designed to solve four specific "Points of Failure": the **Complex Term Gap**, the **Cultural Gap**, the **Age Gap**, and the **Language Gap**.
-<div align="center">
-  <img src="/images/Solution_grid.png" alt="Solution Grid" width="600">
-</div>
 
 ### ✨ Key Features
 The platform offers four major functionalities plus accessibility tools in one seamless interface:
@@ -53,7 +50,7 @@ Specialize in high-accuracy translation of vital medical instructions into **20+
 ### ⚙️ Technical Challenges & Architecture
 Building CareTranslate required architecting a system capable of complex, context-aware Natural Language Processing (NLP) while maintaining high speed.
 <div align="center">
-  <img src="/images/TechStack.png" alt="Technical Architecture" width="700">
+  <img src="/images/TechStack.png" alt="Technical Architecture" width="350">
 </div>
 
 #### The Challenge: Context-Aware Persona Switching
