@@ -7,7 +7,7 @@
   <p>
     <a href="#-youtube-demo">Watch Demo</a> • 
     <a href="#tech-stack">Tech Stack</a> • 
-    <a href="#features">Features</a>
+    <a href="#features">Features</a> • 
   </p>
 </div>
 ---
