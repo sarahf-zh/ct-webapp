@@ -1,416 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CareTranslate - Breaking down healthcare communication barriers with AI-powered translation and cultural sensitivity">
-    <meta name="keywords" content="healthcare, medical translation, cultural sensitivity, medical communication, AI, Gemini">
-    <meta name="author" content="CareTranslate Team">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="CareTranslate - Healthcare Communication Bridge">
-    <meta property="og:description" content="Breaking down healthcare communication barriers with AI-powered translation and cultural sensitivity">
-    <meta property="og:image" content="https://caretranslate.vercel.app/og-image.png">
-    <meta property="og:url" content="https://caretranslate.vercel.app">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CareTranslate - Healthcare Communication Bridge">
-    <meta name="twitter:description" content="Breaking down healthcare communication barriers with AI-powered translation and cultural sensitivity">
-    <meta name="twitter:image" content="https://caretranslate.vercel.app/twitter-image.png">
-    
-    <title>CareTranslate - Healthcare Communication Bridge</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    
-    <!-- Tailwind CSS CDN for this static page -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom Tailwind Config -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5',
-                        secondary: '#7C3AED'
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>CareTranslate | Healthcare Communication Bridge</title>
     
     <style>
+        :root {
+            /* --- EXTRACTED FROM SOURCE --- */
+            /* The specific gradient from the provided source file */
+            --new-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
+            /* Feature Colors derived from source */
+            --color-medical-blue: #3b82f6;
+            --color-cultural-green: #22c55e;
+            --color-kids-pink: #ec4899;
+            --color-trans-purple: #a855f7;
+            --color-dict-orange: #f97316;
+            --color-voice-teal: #14b8a6;
+
+            /* Base styles from original */
+            --bg-soft-purple: #f3f4fa; 
+            --accent-blue: #2962ff;
+            --text-dark: #1a1a1a;
+            --text-gray: #4a4a4a;
+            --border-light: #e0e0e0;
+            --card-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+            --card-radius: 12px;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            font-size: 16px;
+            background-color: var(--bg-soft-purple);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
+
+        /* --- HEADER & HERO --- */
+        header {
+            background: var(--new-gradient);
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            width: 90px;
+            height: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        h1.site-title {
+            font-size: 3em;
+            margin: 15px 0 5px 0;
+            color: white;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        p.tagline {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0;
+            max-width: 600px;
+            font-weight: 400;
+        }
+
+        /* --- CARD STYLING --- */
+        .card {
+            background-color: #ffffff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h2 {
+            font-size: 2em;
+            color: var(--text-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: var(--new-gradient); 
+            border-radius: 2px;
+            margin-top: 8px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #4c1d95;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        p { color: var(--text-gray); margin-bottom: 15px; }
+        ul { color: var(--text-gray); padding-left: 20px; }
+        ol { color: var(--text-gray); padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        /* --- LINKS & BUTTONS --- */
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .btn-demo {
+            display: inline-block;
+            background: white;
+            color: #667eea !important;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none !important;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+            background: #f8fafc;
+        }
+
+        /* --- LAYOUTS --- */
+        .flex-row {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .flex-start { align-items: flex-start; }
+        .flex-col-text { flex: 1; }
+        .flex-col-img { flex: 1; text-align: center; }
+
+        .feature-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tech-stack-img {
+            max-width: 70%;
+            height: auto;
+            margin-top: 40px;
+        }
+
+        /* --- PROFILE PHOTO --- */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--border-light);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- STATS BOXES --- */
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
             transition: transform 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+        .stat-box:hover { transform: translateY(-3px); }
+        .stat-number {
+            display: block;
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #dc2626;
+            margin-bottom: 5px;
+        }
+        .stat-label { font-size: 0.9em; color: #64748b; }
+
+        /* --- ENRICHED FEATURE ICONS --- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            background: #fafafa;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin-right: 12px;
+            font-size: 1.2em;
+            color: white;
+            vertical-align: middle;
+        }
+        .bg-blue { background-color: var(--color-medical-blue); }
+        .bg-green { background-color: var(--color-cultural-green); }
+        .bg-pink { background-color: var(--color-kids-pink); }
+        .bg-purple { background-color: var(--color-trans-purple); }
+        .bg-teal { background-color: var(--color-voice-teal); }
+        .bg-orange { background-color: var(--color-dict-orange); }
+
+        .feature-item h4 {
+            display: flex;
+            align-items: center;
+            margin: 0 0 15px 0;
+            color: var(--text-dark);
+            font-size: 1.1em;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .flex-row { flex-direction: column; }
+            .stats-container { flex-direction: column; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .container { padding: 15px; }
+            h1.site-title { font-size: 2.2em; }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+            font-size: 0.9em;
+            background: #fff;
+            border-top: 1px solid var(--border-light);
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-                            <span class="text-white font-bold text-lg">C</span>
-                        </div>
-                        <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            CareTranslate
-                        </span>
-                    </div>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="/images/applogo.png" alt="CareTranslate Logo" class="logo">
+            <div>
+                <h1 class="site-title">CareTranslate</h1>
+                <p class="tagline">Breaking down healthcare communication barriers with AI.</p>
+            </div>
+            <a href="https://youtu.be/QdNo4heb6e8" target="_blank" class="btn-demo">▶ Watch Demo Video</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="welcome" class="card">
+            <h2>Welcome to CareTranslate!</h2>
+            <p>My inspiration for creating CareTranslate came from a realization that a healthcare system cannot genuinely care for its patients if it cannot communicate clearly with them. This project grew from observing the massive, tangible problems caused by communication failures in medicine. I saw alarming statistics indicating that poor communication is a critical public health issue. My core belief is that the true path to better healthcare doesn't always lie in developing a new drug, but in establishing a new depth of understanding.</p>
+        </section>
+
+        <section id="about" class="card" style="border-left: 5px solid var(--accent-blue);">
+            <div class="flex-row flex-start">
+                <div>
+                    <img src="https://raw.githubusercontent.com/sarahf-zh/my-android/main/icons/SarahZhou_profile.jpg" alt="Sarah Zhou" class="profile-pic">
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors">Features</a>
-                    <a href="#demo" class="text-gray-700 hover:text-blue-600 transition-colors">Demo</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-                    <a href="https://github.com/yourusername/caretranslate" target="_blank" 
-                       class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all">
-                        View on GitHub
-                    </a>
+                <div class="flex-col-text">
+                    <h3>About the Author</h3>
+                    <p><b>Sarah Zhou</b> is a student at Castilleja School who believes that the path to better healthcare lies in establishing a new depth of understanding. She developed CareTranslate to empower patients with diverse backgrounds.</p>
+                    <p>Contact: <a href="mailto:sarahf.zhou@gmail.com">sarahf.zhou@gmail.com</a></p>
                 </div>
             </div>
-        </div>
-    </nav>
+        </section>
 
-    <!-- Hero Section -->
-    <section class="gradient-bg pt-20 pb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                    Breaking Down Healthcare
-                    <span class="block text-yellow-300">Communication Barriers</span>
-                </h1>
-                <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-                    AI-powered medical translation, cultural sensitivity guidance, and child-friendly explanations 
-                    to make healthcare accessible to everyone.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/app" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:-translate-y-1">
-                        🚀 Try CareTranslate
-                    </a>
-                    <a href="#demo" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all">
-                        📺 Watch Demo
-                    </a>
+        <section id="problem" class="card">
+            <h2>Problem Statement</h2>
+            <p>Today,  communication failures in healthcare cause nearly 70% of serious medical errors , which costs $1.7 billion in malpractice annually. Healthcare simply isn't accessible if patients are confused or feel misunderstood.</p>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;" class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-number">$1.7B</span>
+                    <span class="stat-label">In Malpractice Costs</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Powerful Features for Better Healthcare Communication</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Our AI-powered platform bridges language, cultural, and complexity barriers in healthcare.
-                </p>
+                <div class="stat-box">
+                    <span class="stat-number">2,000</span>
+                    <span class="stat-label">Preventable Deaths</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">70%</span>
+                    <span class="stat-label">Of Serious Errors</span>
+                </div>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Medical Translation -->
-                <div class="feature-card bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-2xl border border-blue-200">
-                    <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl">🏥</span>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Medical Terms Translation</h3>
-                    <p class="text-gray-600 mb-4">
-                        Convert complex medical jargon into plain English with adjustable complexity levels powered by Google Gemini AI.
-                    </p>
-                    <ul class="text-sm text-gray-500 space-y-1">
-                        <li>✓ 5 complexity levels</li>
-                        <li>✓ Analogies and examples</li>
-                        <li>✓ Save to personal dictionary</li>
-                    </ul>
-                </div>
-
-                <!-- Cultural Bridge -->
-                <div class="feature-card bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-2xl border border-green-200">
-                    <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl">🌍</span>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Cultural Bridge</h3>
-                    <p class="text-gray-600 mb-4">
-                        Navigate cultural differences in healthcare with sensitive communication strategies for diverse backgrounds.
-                    </p>
-                    <ul class="text-sm text-gray-500 space-y-1">
-                        <li>✓ 6+ cultural backgrounds</li>
-                        <li>✓ Traditional + modern medicine</li>
-                        <li>✓ Family dynamics guidance</li>
-                    </ul>
-                </div>
-
-                <!-- Kids Explanation -->
-                <div class="feature-card bg-gradient-to-br from-pink-50 to-rose-100 p-6 rounded-2xl border border-pink-200">
-                    <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl">👶</span>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Kids Explanation</h3>
-                    <p class="text-gray-600 mb-4">
-                        Make medical procedures and conditions understandable and less scary for children of all ages.
-                    </p>
-                    <ul class="text-sm text-gray-500 space-y-1">
-                        <li>✓ Age-appropriate language</li>
-                        <li>✓ Fun analogies</li>
-                        <li>✓ Reduces medical anxiety</li>
-                    </ul>
-                </div>
-
-                <!-- Real-time Translation -->
-                <div class="feature-card bg-gradient-to-br from-purple-50 to-violet-100 p-6 rounded-2xl border border-purple-200">
-                    <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl">🗣️</span>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Real-time Translation</h3>
-                    <p class="text-gray-600 mb-4">
-                        Translate medical instructions and information into 20+ languages with medical terminology support.
-                    </p>
-                    <ul class="text-sm text-gray-500 space-y-1">
-                        <li>✓ 20+ languages</li>
-                        <li>✓ Medical specialization</li>
-                        <li>✓ Instant translation</li>
-                    </ul>
-                </div>
-
-                <!-- Personal Dictionary -->
-                <div class="feature-card bg-gradient-to-br from-orange-50 to-amber-100 p-6 rounded-2xl border border-orange-200">
-                    <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl">📚</span>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Personal Dictionary</h3>
-                    <p class="text-gray-600 mb-4">
-                        Save, organize, and search your medical terms for quick reference and offline access.
-                    </p>
-                    <ul class="text-sm text-gray-500 space-y-1">
-                        <li>✓ Search & filter</li>
-                        <li>✓ Offline access</li>
-                        <li>✓ Export functionality</li>
-                    </ul>
-                </div>
-
-                <!-- Voice Input -->
-                <div class="feature-card bg-gradient-to-br from-teal-50 to-cyan-100 p-6 rounded-2xl border border-teal-200">
-                    <div class="w-12 h-12 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl">🎤</span>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Voice Input</h3>
-                    <p class="text-gray-600 mb-4">
-                        Hands-free operation with speech-to-text capabilities for accessibility and convenience.
-                    </p>
-                    <ul class="text-sm text-gray-500 space-y-1">
-                        <li>✓ Speech recognition</li>
-                        <li>✓ Multiple languages</li>
-                        <li>✓ Accessibility focused</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Section -->
-    <section id="demo" class="py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">See CareTranslate in Action</h2>
-                <p class="text-lg text-gray-600">
-                    Watch how our platform transforms complex medical communication
-                </p>
-            </div>
+            <h3>Four Major Points of Failure</h3>
+            <p>Research made it clear to me that communication gaps in healthcare are a fundamental systemic problem. My design was directly inspired by the four major points of failure I identified:</p>
+            <ul>
+                <li><b>The Complex Term Gap:</b> Empowering patients who feel misunderstood when confronted with complex jargon like "Cholecystitis".</li>
+                <li><b>The Cultural Gap:</b> Bridging differences in health beliefs that create friction and damage the patient-doctor relationship.</li>
+                <li><b>The Age Gap:</b> Reducing childhood fear and anxiety by replacing complex adult explanations with simple, non-threatening narratives.</li>
+                <li><b>The Language Gap:</b> Eliminating the risk of critical errors caused by inaccurate translation of prescription instructions.</li>
+            </ul>
             
-            <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
-                <div class="aspect-video bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center">
-                    <div class="text-center text-white">
-                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="text-4xl">▶️</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Interactive Demo</h3>
-                        <p class="text-blue-100">Click to see CareTranslate features in action</p>
-                        <a href="/app" class="inline-block mt-4 bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
-                            Try Live Demo
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-3xl font-bold text-blue-600 mb-2">6+</div>
-                    <div class="text-gray-600">Cultural Backgrounds</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-green-600 mb-2">20+</div>
-                    <div class="text-gray-600">Languages Supported</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-purple-600 mb-2">5</div>
-                    <div class="text-gray-600">Complexity Levels</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-orange-600 mb-2">4</div>
-                    <div class="text-gray-600">Age Groups</div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section id="solution" class="card">
+            <h2>The Solution</h2>
+            <p>My application, CareTranslate, is an innovative web platform that utilizes Generative AI to act as a crucial communication bridge in healthcare. I built the app to offer context-aware explanations and translations, which is powered by Google's Gemini AI for deep contextual understanding. The technology dynamically adjusts the output based on the specific audience, whether that audience is a patient, a provider, or a child.</p>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">About CareTranslate</h2>
-                    <p class="text-lg text-gray-600 mb-6">
-                        CareTranslate was born from the recognition that healthcare communication barriers prevent 
-                        millions of people from receiving optimal care. Our mission is to bridge these gaps using 
-                        AI-powered technology that respects cultural differences and simplifies complex medical information.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
-                                <span class="text-white text-sm">✓</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Culturally Sensitive</h4>
-                                <p class="text-gray-600">Respects diverse healthcare traditions and communication styles</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-1">
-                                <span class="text-white text-sm">✓</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">AI-Powered</h4>
-                                <p class="text-gray-600">Leverages Google Gemini for intelligent, contextual translations</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-3 mt-1">
-                                <span class="text-white text-sm">✓</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Accessible</h4>
-                                <p class="text-gray-600">Designed for all ages and technical abilities with voice input and mobile support</p>
-                            </div>
-                        </div>
-                    </div>
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-item" style="border-left: 4px solid var(--color-medical-blue);">
+                    <h4>
+                        <span class="icon-box bg-blue">🏥</span>
+                        Medical Terms Simplification
+                    </h4>
+                    <p>This feature converts dense medical jargon, like <b>"Myocardial infarction,"</b> into plain, straightforward English. Users can control the complexity level with a slider, which ensures the explanation is appropriate for their needs.</p>
                 </div>
-                <div class="bg-gradient-to-br from-blue-400 to-purple-600 rounded-2xl p-8 text-white">
-                    <h3 class="text-2xl font-bold mb-6">Key Benefits</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3"></span>
-                            Reduces medical anxiety and confusion
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3"></span>
-                            Improves patient-provider communication
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3"></span>
-                            Supports diverse cultural backgrounds
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3"></span>
-                            Makes healthcare accessible to children
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3"></span>
-                            Breaks down language barriers
-                        </li>
-                    </ul>
+                <div class="feature-item" style="border-left: 4px solid var(--color-cultural-green);">
+                    <h4>
+                        <span class="icon-box bg-green">🌍</span>
+                        Cultural Context Bridge
+                    </h4>
+                    <p>This feature provides practical, AI-driven guidance for handling sensitive cross-cultural conversations. For example, it helps a provider understand how to respectfully discuss mental health within an East Asian context.</p>
+                </div>
+                <div class="feature-item" style="border-left: 4px solid var(--color-kids-pink);">
+                    <h4>
+                        <span class="icon-box bg-pink">👶</span>
+                        Kids' Explanation
+                    </h4>
+                    <p>Adapts complex health facts for younger audiences. For a 6 to 8-year-old, I designed it to explain a vaccine using comforting analogies, describing it as giving your body a <b>"super strong army of tiny knights"</b>.</p>
+                </div>
+                <div class="feature-item" style="border-left: 4px solid var(--color-trans-purple);">
+                    <h4>
+                        <span class="icon-box bg-purple">🗣️</span>
+                        Real-time Translation
+                    </h4>
+                    <p>This function specializes in high-accuracy translation of vital medical instructions and terms into more than <b>20 major world languages</b> to eliminate the risk of critical errors.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Technology Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Built with Modern Technology</h2>
-                <p class="text-lg text-gray-600">
-                    Powered by cutting-edge AI and modern web technologies
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-black rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold">N</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-900">Next.js</h4>
-                    <p class="text-sm text-gray-600">React Framework</p>
+            <h3 style="margin-top: 30px;">Accessibility Tools</h3>
+            <p>CareTranslate is designed to build a strong foundation of empathy, trust, and respect for all users.</p>
+            <div class="feature-grid">
+                <div class="feature-item" style="border-left: 4px solid var(--color-voice-teal);">
+                    <h4>
+                        <span class="icon-box bg-teal">🎤</span>
+                        Voice Input
+                    </h4>
+                    <p>For universal accessibility, I included a Speech-to-Text feature for voice input, which directly facilitates interaction for visually impaired users.</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold">TS</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-900">TypeScript</h4>
-                    <p class="text-sm text-gray-600">Type Safety</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-teal-500 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold">TW</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-900">Tailwind</h4>
-                    <p class="text-sm text-gray-600">CSS Framework</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold">G</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-900">Gemini AI</h4>
-                    <p class="text-sm text-gray-600">Google AI</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-red-500 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold">GT</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-900">Translate</h4>
-                    <p class="text-sm text-gray-600">Google API</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-black rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold">V</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-900">Vercel</h4>
-                    <p class="text-sm text-gray-600">Deployment</p>
+                <div class="feature-item" style="border-left: 4px solid var(--color-dict-orange);">
+                    <h4>
+                        <span class="icon-box bg-orange">📚</span>
+                        Personal Dictionary
+                    </h4>
+                    <p>Additionally, CareTranslate has a "Save to Dictionary" feature that lets users save, search, and review all their translated terms offline.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Call to Action -->
-    <section class="py-16 gradient-bg">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                Ready to Transform Healthcare Communication?
-            </h2>
-            <p class="text-xl text-blue-100 mb-8">
-                Join thousands of users who are breaking down healthcare communication barriers with CareTranslate.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/app" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:-translate-y-1">
-                    🚀 Start Using CareTranslate
-                </a>
-                <a href="https://github.com/yourusername/caretranslate" target="_blank" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all">
-                    ⭐
+        <section id="technology" class="card">
+            <div>
+                <h2>Technical Challenges & Architecture</h2>
+                <p>Building CareTranslate required architecting a system capable of complex, context-aware Natural Language Processing (NLP) while maintaining high speed.</p>
+                
+                <h3>The Challenge: Context-Aware Persona Switching</h3>
+                <p>Unlike a standard dictionary, this system had to understand nuanced intent. I had to engineer the backend to dynamically switch functions:</p>
+                <ol>
+                    <li><b>Simplification:</b> Converting terms to plain English.</li>
+                    <li><b>Cultural Guidance:</b> Generating respectful, actionable advice based on cultural norms.</li>
+                    <li><b>Age-Appropriate Analogy:</b> Generating friendly narratives for children.</li>
+                </ol>
+
+                <h3>The Solution: Robust Prompt Engineering</h3>
+                <ul>
+                    <li><b>Backend:</b> I utilized <b>Next.js API Routes</b> to build a secure serverless backend. This required meticulous prompt engineering to ensure the Gemini model received clear instructions regarding target audience, tone, and output format.</li>
+                    <li><b>Verification:</b> I utilized auxiliary Generative AI tools (ChatGPT) to verify the accuracy of cultural advice and contextual responses during development.</li>
+                </ul>
+
+                <h3>Tech Stack</h3>
+                <ul>
+                    <li><b>Frontend:</b> <b>Next.js 14</b> and <b>TypeScript</b> for state management and a fast, responsive UI.</li>
+                    <li><b>Styling:</b> <b>Tailwind CSS</b>.</li>
+                    <li><b>AI Core 1:</b> <b>Google Gemini API</b> (Contextual Explanations, Analogies, Cultural Guidance).</li>
+                    <li><b>AI Core 2:</b> <b>Google Translate API</b> (High-Accuracy Real-time Translation).</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center;">
+                <img src="/images/TechStack.png" alt="Technical Architecture Diagram" class="tech-stack-img">
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 CareTranslate Project. Created by Sarah Zhou.</p>
+    </footer>
+
+</body>
+</html>
