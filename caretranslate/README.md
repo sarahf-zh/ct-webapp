@@ -52,14 +52,9 @@
 
 ## 📸 Screenshots
 <div align="center">
-  <img src="/screenshots/Main_UI1.png" alt="Technical Architecture" width="350">
+  <img src="/screenshots/Main_UI1.png" alt="CareTranlate UI" width="350">
 </div>
 
-### Desktop View
-![CareTranslate Desktop](https://via.placeholder.com/800x500/4F46E5/FFFFFF?text=CareTranslate+Desktop+View)
-
-### Mobile View
-![CareTranslate Mobile](https://via.placeholder.com/400x700/4F46E5/FFFFFF?text=CareTranslate+Mobile+View)
 
 ## 🛠️ Technology Stack
 
