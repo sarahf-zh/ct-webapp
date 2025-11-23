@@ -1,60 +1,78 @@
-# CareTranslate
-### Breaking Down Healthcare Communication Barriers
-
-AI-powered medical translation, cultural sensitivity guidance, and child-friendly explanations to make healthcare accessible to everyone.
-
+## CareTranslate
+<div align="center">
+  <img src="/images/applogo.png" alt="CareTranslate Logo" width="120">
+  <br>
+  <h3><b>Breaking down healthcare communication barriers</b></h3>
+  <p><b>Leverage AI to bridge communication gaps and make healthcare truly accessible.</b></p>
+  <p>
+    <a href="#-youtube-demo">Watch Demo</a> • 
+    <a href="#tech-stack">Tech Stack</a> • 
+    <a href="#features">Features</a>
+  </p>
+</div>
 ---
+### 📖 Overview
+**CareTranslate** is an innovative web platform that uses Generative AI to act as a crucial communication bridge in healthcare. My core mission is to establish a new depth of understanding between patients and providers, rather than just developing a new drug. The app utilizes **Google's Gemini AI** for deep contextual understanding and the **Google Translate API** for precise language translation. The technology dynamically adjusts its output persona based on the specific audience—whether that audience is a patient, a provider, or a child.
 
-## About CareTranslate
+<div align="center">
+  <img src="/images/Main_UI1.png" alt="CareTranslate Main UI" width="800">
+</div>
 
-CareTranslate was born from the recognition that healthcare communication barriers prevent millions of people from receiving optimal care. Our mission is to bridge these gaps using AI-powered technology that respects cultural differences and simplifies complex medical information.
+### 💡 The Inspiration & The Problem
+I realized that a healthcare system cannot genuinely care for its patients if it cannot communicate clearly with them. Communication gaps in medicine are not just inconveniences; they are systemic failures.
+* **Financial Impact:** **$1.7B in Malpractice Costs** are attributed to communication failures.
+* **Human Cost:** Nearly **2,000 preventable deaths** occur due to these gaps.
+* **Error Rate:** **70% of Serious Medical Errors** (including medical jargon and misunderstandings) stem from communication failure.
 
-### Key Benefits
-* Reduces medical anxiety and confusion
-* Improves patient-provider communication
-* Supports diverse cultural backgrounds
-* Makes healthcare accessible to children
-* Breaks down language barriers
+CareTranslate was designed to solve four specific "Points of Failure": the **Complex Term Gap**, the **Cultural Gap**, the **Age Gap**, and the **Language Gap**.
+<div align="center">
+  <img src="/images/Solution_grid.png" alt="Solution Grid" width="600">
+</div>
 
-### Our Mission
-* **Culturally Sensitive:** Respects diverse healthcare traditions and communication styles.
-* **AI-Powered:** Leverages Google Gemini for intelligent, contextual translations.
-* **Accessible:** Designed for all ages and technical abilities with voice input and mobile support.
+### ✨ Key Features
+The platform offers four major functionalities plus accessibility tools in one seamless interface:
+#### 1. Medical Terms Simplification (The Complex Term Gap)
+Converts dense medical jargon (e.g., "Myocardial infarction") into plain, straightforward English.
+* **Dynamic Complexity Control:** Includes a **complexity slider** that allows users to adjust the explanation level to their specific needs.
 
----
+#### 2. Cultural Context Bridge (The Cultural Gap)
+Provides AI-driven guidance for handling sensitive cross-cultural conversations.
+* **Real-world Application:** Helps providers navigate nuance, such as understanding how to respectfully discuss mental health within an East Asian context.
 
-## Powerful Features
+#### 3. Kids' Explanation (The Age Gap)
+Adapts complex health facts into non-threatening narratives to reduce childhood fear.
+* **Analogy Engine:** Explains scary concepts using comforting analogies—for example, describing a vaccine to a 6-year-old as "giving your body a super strong army of tiny knights."
 
-Our AI-powered platform bridges language, cultural, and complexity barriers in healthcare.
+#### 4. Real-time Translation (The Language Gap)
+Specialize in high-accuracy translation of vital medical instructions into **20+ major global languages** to prevent medication errors.
 
-### 🏥 Medical Terms Translation
-Convert complex medical jargon into plain English with adjustable complexity levels powered by Google Gemini AI.
-* ✓ 5 complexity levels
-* ✓ Analogies and examples
-* ✓ Save to personal dictionary
+#### 5. Accessibility & Tools
+* **Speech-to-Text:** Facilitates interaction for visually impaired users via direct voice input.
+* **Save to Dictionary:** Allows users to save, search, and review their translated terms offline.
 
-### 🌍 Cultural Bridge
-Navigate cultural differences in healthcare with sensitive communication strategies for diverse backgrounds.
+### ⚙️ Technical Challenges & Architecture
+Building CareTranslate required architecting a system capable of complex, context-aware Natural Language Processing (NLP) while maintaining high speed.
+<div align="center">
+  <img src="/images/TechStack.png" alt="Technical Architecture" width="700">
+</div>
 
-### 👶 Kids Explanation
+#### The Challenge: Context-Aware Persona Switching
+Unlike a standard dictionary, this system had to understand nuanced intent. I had to engineer the backend to dynamically switch functions:
+1. **Simplification:** Converting terms to plain English.
+2. **Cultural Guidance:** Generating respectful, actionable advice based on cultural norms.
+3. **Age-Appropriate Analogy:** Generating friendly narratives for children.
 
+#### The Solution: Robust Prompt Engineering
+* **Backend:** I utilized **Next.js API Routes** to build a secure serverless backend. This required meticulous prompt engineering to ensure the Gemini model received clear instructions regarding target audience, tone, and output format.
+* **Verification:** I utilized auxiliary Generative AI tools (ChatGPT) to verify the accuracy of cultural advice and contextual responses during development.
 
-### 🗣️ Real-time Translation
+#### Tech Stack
+* **Frontend:** **Next.js 14** and **TypeScript** for state management and a fast, responsive UI.
+* **Styling:** **Tailwind CSS**.
+* **AI Core 1:** **Google Gemini API** (Contextual Explanations, Analogies, Cultural Guidance).
+* **AI Core 2:** **Google Translate API** (High-Accuracy Real-time Translation).
 
-### 📚 Personal Dictionary
+### 📺 YouTube Demo
+Watch a 3-minute video walkthrough of the app in action:
+**[https://youtu.be/QdNo4heb6e8](https://youtu.be/QdNo4heb6e8)**
 
-### 🎤 Voice Input
-Hands-free operation with speech-to-text capabilities for accessibility and convenience.
-
----
-
-## Built With
-
-Powered by cutting-edge AI and modern web technologies:
-
-* **Next.js** (React Framework)
-* **TypeScript** (Type Safety)
-* **Tailwind CSS** (CSS Framework)
-* **Gemini AI** (Google AI)
-* **Google Translate API**
-* **Vercel** (Deployment)
