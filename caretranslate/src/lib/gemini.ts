@@ -83,7 +83,7 @@ export const generateMedicalTranslation = async (
     
     
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash-lite',
+      model: 'gemini-flash-lite-latest',
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
@@ -138,7 +138,7 @@ Please provide a comprehensive, culturally-specific response that includes:
 Be specific to ${options.culturalBackground} culture - use actual cultural terms, reference real practices, and provide concrete examples.`;
 
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash-lite',
+      model: 'gemini-flash-lite-latest',
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
@@ -190,7 +190,7 @@ Structure:
 Make it educational but not scary. Focus on the helpers (doctors, nurses) and how they keep people healthy and safe.`;
 
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash-lite',
+      model: 'gemini-flash-lite-latest',
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
