@@ -31,8 +31,8 @@ import { commonMedicalLanguages } from '@/lib/googleTranslate';
 interface DictionaryItem {
   id: string;
   term: string;
-  explanation?: string; // Made optional for fallback
-  translation?: string; // Added old field for fallback
+  explanation?: string;
+  translation?: string;
   saved: string;
   complexity?: number;
   category: string;
@@ -131,12 +131,10 @@ const ModeCard = ({
     onClick={onClick}
   >
     <div
-      // UPDATED: Increased container size to fit the larger icon
       className={`w-16 h-16 rounded-xl flex items-center justify-center mb-4 ${
         isActive ? 'bg-white bg-opacity-20' : 'bg-blue-100'
       }`}
     >
-      {/* UPDATED: Increased icon size */}
       <Icon className={`w-8 h-8 ${isActive ? 'text-white' : 'text-blue-600'}`} />
     </div>
     <h3 className="font-semibold text-lg mb-2">{title}</h3>
@@ -146,7 +144,7 @@ const ModeCard = ({
   </div>
 );
 
-// NEW: Header icon mapping
+// Header icon mapping
 const headerIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'simplified term': BookOpen,
   'everyday language explanation': MessageSquare,
@@ -161,12 +159,11 @@ const headerIcons: Record<string, React.ComponentType<{ className?: string }>> =
   'common misunderstandings': Lightbulb,
 };
 
-// NEW: Component to render HTML result with icons
+// Component to render HTML result with icons
 const HtmlResultRenderer = memo(
   ({ result, activeMode }: { result: string; activeMode: string }) => {
     // Only apply special formatting for medical and cultural modes
     if (activeMode !== 'medical' && activeMode !== 'cultural') {
-      // Use original rendering for other modes (like kids)
       return (
         <div className="prose prose-sm max-w-none whitespace-pre-line text-gray-800">
           {result}
@@ -180,23 +177,18 @@ const HtmlResultRenderer = memo(
       <div className="space-y-2">
         {lines.map((line, index) => {
           // 1. Check for Headers
-          // Clean line: remove markdown (**, ##) and trim
           const cleanedLine = line
             .replace(/^(##\s*|\*\*\s*)/, '')
             .replace(/\s*\*\*$/, '')
             .trim();
 
-          // Find icon (case-insensitive, trim space, remove colon)
           const Icon =
             headerIcons[cleanedLine.toLowerCase().replace(/:$/, '').trim()];
 
           if (Icon) {
             return (
               <div key={index} className="flex items-start space-x-2 pt-4">
-                <Icon
-                  className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
-                  //style={{ marginTop: '0.125rem' }}
-                />
+                <Icon className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                 <h3 className="text-lg font-bold text-gray-900">
                   {cleanedLine}
                 </h3>
@@ -213,20 +205,16 @@ const HtmlResultRenderer = memo(
           let processedLine = line;
           let isBullet = false;
 
-          // Check for bullet
           if (processedLine.trim().startsWith('* ')) {
             isBullet = true;
-            processedLine = processedLine.trim().substring(2).trim(); // Remove '* '
+            processedLine = processedLine.trim().substring(2).trim();
           } else {
-            // Remove any other list-like markers if not a bullet
             processedLine = processedLine
               .replace(/^(##\s*|\*\*\s*)/, '')
               .replace(/\s*\*\*$/, '')
               .trim();
           }
 
-          // Process **bold** and _italic_
-          // Use dangerouslySetInnerHTML for this
           processedLine = processedLine
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/_(.*?)_/g, '<em>$1</em>');
@@ -306,15 +294,8 @@ const HomeView = ({
 }) => (
   <>
     {/* Mode Selection */}
+    {/* REORDERED: Cultural -> Kids -> Medical */}
     <div className="grid md:grid-cols-3 gap-6 mb-8">
-      <ModeCard
-        mode="medical"
-        icon={BookOpen}
-        title="Medical Terms"
-        description="Translate complex medical jargon into plain, understandable language"
-        isActive={activeMode === 'medical'}
-        onClick={() => setActiveMode('medical')}
-      />
       <ModeCard
         mode="cultural"
         icon={Globe2}
@@ -330,6 +311,14 @@ const HomeView = ({
         description="Make medical information child-friendly and less scary"
         isActive={activeMode === 'kids'}
         onClick={() => setActiveMode('kids')}
+      />
+      <ModeCard
+        mode="medical"
+        icon={BookOpen}
+        title="Medical Terms"
+        description="Translate complex medical jargon into plain, understandable language"
+        isActive={activeMode === 'medical'}
+        onClick={() => setActiveMode('medical')}
       />
     </div>
 
@@ -466,18 +455,17 @@ const HomeView = ({
     {/* Result Section */}
     {result && (
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border-l-4 border-green-400 mb-20">
-        {/* UPDATED: Renders the result using the new component */}
         <HtmlResultRenderer result={result} activeMode={activeMode} />
 
         <div className="mt-4 flex space-x-2">
-            <button
-              onClick={handleSaveToDictionary}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 flex items-center space-x-1"
-            >
-              <Save className="w-4 h-4" />
-              <span>Save to Dictionary</span>
-            </button>
-          
+          <button
+            onClick={handleSaveToDictionary}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 flex items-center space-x-1"
+          >
+            <Save className="w-4 h-4" />
+            <span>Save to Dictionary</span>
+          </button>
+
           <button className="px-4 py-2 bg-white text-gray-700 rounded-lg text-sm hover:bg-gray-50 border">
             Share
           </button>
@@ -545,7 +533,6 @@ const DictionaryView = ({
                     <h3 className="font-semibold text-gray-800 text-lg">
                       {item.term}
                     </h3>
-                    {/* UPDATED: Use fallback */}
                     <p className="text-gray-600 mt-1 leading-relaxed line-clamp-2">
                       {item.explanation || item.translation}
                     </p>
@@ -675,7 +662,6 @@ const TranslateView = ({
   </div>
 );
 
-// NEW: DictionaryDetailModal component
 const DictionaryDetailModal = ({
   item,
   onClose,
@@ -684,17 +670,14 @@ const DictionaryDetailModal = ({
   onClose: () => void;
 }) => {
   return (
-    // Backdrop
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
       onClick={onClose}
     >
-      {/* Modal Panel */}
       <div
         className="bg-white rounded-2xl shadow-xl w-full max-w-lg m-4 max-h-[80vh] flex flex-col"
-        onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-bold text-gray-800">{item.term}</h2>
           <button
@@ -705,7 +688,6 @@ const DictionaryDetailModal = ({
           </button>
         </div>
 
-        {/* Content (Scrollable) */}
         <div className="p-6 overflow-y-auto">
           <div className="flex items-center space-x-4 mb-4 text-sm text-gray-500">
             <span>Saved {item.saved}</span>
@@ -715,18 +697,12 @@ const DictionaryDetailModal = ({
             <span className="capitalize">{item.category}</span>
           </div>
           
-          {/*
-            Replaced the simple <div> with HtmlResultRenderer.
-            We pass item.category (which is 'medical') as the 'activeMode' prop
-            to ensure the correct formatting is applied.
-          */}
           <HtmlResultRenderer
             result={item.explanation || item.translation || ''}
             activeMode={item.category}
           />
         </div>
 
-        {/* Footer */}
         <div className="p-4 bg-gray-50 border-t rounded-b-2xl">
           <button
             onClick={onClose}
@@ -744,7 +720,8 @@ DictionaryDetailModal.displayName = 'DictionaryDetailModal';
 // Main CareTranslateApp component
 export default function CareTranslateApp() {
   const [activeTab, setActiveTab] = useState('home');
-  const [activeMode, setActiveMode] = useState('medical');
+  // UPDATED: Default is now 'cultural' to match the first visual item
+  const [activeMode, setActiveMode] = useState('cultural');
   const [input, setInput] = useState('');
   const [result, setResult] = useState('');
   const [isListening, setIsListening] = useState(false);
@@ -872,11 +849,8 @@ export default function CareTranslateApp() {
   };
 
   const handleSaveToDictionary = () => {
-    //if (input && result && activeMode === 'medical') {
-      // The `saveToDictionary` hook will receive 'result' as the explanation
       saveToDictionary(input, result, activeMode, complexityLevel);
       alert('Saved to your personal dictionary!');
-    //}
   };
 
   const toggleVoiceRecording = useCallback(() => {
@@ -1023,7 +997,6 @@ export default function CareTranslateApp() {
         </div>
       </nav>
 
-      {/* Render modal conditionally */}
       {selectedDictionaryItem && (
         <DictionaryDetailModal
           item={selectedDictionaryItem}

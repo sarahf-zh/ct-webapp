@@ -28,17 +28,18 @@ CareTranslate was designed to solve four specific "Points of Failure": the **Com
 
 ### ✨ Key Features
 The platform offers four major functionalities plus accessibility tools in one seamless interface:
-#### 1. Medical Terms Simplification (The Complex Term Gap)
-Converts dense medical jargon (e.g., "Myocardial infarction") into plain, straightforward English.
-* **Dynamic Complexity Control:** Includes a **complexity slider** that allows users to adjust the explanation level to their specific needs.
 
-#### 2. Cultural Context Bridge (The Cultural Gap)
+#### 1. Cultural Context Bridge (The Cultural Gap)
 Provides AI-driven guidance for handling sensitive cross-cultural conversations.
 * **Real-world Application:** Helps providers navigate nuance, such as understanding how to respectfully discuss mental health within an East Asian context.
 
-#### 3. Kids' Explanation (The Age Gap)
+#### 2. Kids' Explanation (The Age Gap)
 Adapts complex health facts into non-threatening narratives to reduce childhood fear.
 * **Analogy Engine:** Explains scary concepts using comforting analogies—for example, describing a vaccine to a 6-year-old as "giving your body a super strong army of tiny knights."
+
+#### 3. Medical Terms Simplification (The Complex Term Gap)
+Converts dense medical jargon (e.g., "Myocardial infarction") into plain, straightforward English.
+* **Dynamic Complexity Control:** Includes a **complexity slider** that allows users to adjust the explanation level to their specific needs.
 
 #### 4. Real-time Translation (The Language Gap)
 Specialize in high-accuracy translation of vital medical instructions into **20+ major global languages** to prevent medication errors.
