@@ -87,7 +87,7 @@ export const generateMedicalTranslation = async (
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
-        maxOutputTokens: 600
+        maxOutputTokens: 700
       }
     });
     const result = await model.generateContent(prompt);
@@ -142,7 +142,7 @@ Be specific to ${options.culturalBackground} culture - use actual cultural terms
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
-        maxOutputTokens: 650
+        maxOutputTokens: 700
       }
     });
     const result = await model.generateContent(prompt);
