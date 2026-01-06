@@ -53,7 +53,8 @@ const MemoizedTextarea = memo(
     className: string;
   }) => (
     <textarea
-      className={className}
+      // UPDATED: Added text-gray-900 and bg-white to force visibility in dark mode
+      className={`${className} text-gray-900 bg-white`}
       rows={rows}
       placeholder={placeholder}
       value={value}
@@ -75,7 +76,12 @@ const MemoizedSelect = memo(
     children: React.ReactNode;
     className: string;
   }) => (
-    <select className={className} value={value} onChange={onChange}>
+    <select 
+      // UPDATED: Added text-gray-900 and bg-white to force visibility in dark mode
+      className={`${className} text-gray-900 bg-white`} 
+      value={value} 
+      onChange={onChange}
+    >
       {children}
     </select>
   ),
@@ -98,7 +104,8 @@ const MemoizedInput = memo(
   }) => (
     <input
       type={type}
-      className={className}
+      // UPDATED: Added text-gray-900 and bg-white to force visibility in dark mode
+      className={`${className} text-gray-900 bg-white`}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -137,7 +144,7 @@ const ModeCard = ({
     >
       <Icon className={`w-8 h-8 ${isActive ? 'text-white' : 'text-blue-600'}`} />
     </div>
-    <h3 className="font-semibold text-lg mb-2">{title}</h3>
+    <h3 className={`font-semibold text-lg mb-2 ${!isActive ? 'text-gray-900' : ''}`}>{title}</h3>
     <p className={`text-sm ${isActive ? 'text-blue-100' : 'text-gray-600'}`}>
       {description}
     </p>
@@ -229,7 +236,7 @@ const HtmlResultRenderer = memo(
                   &bull;
                 </span>
                 <p
-                  className="leading-relaxed"
+                  className="leading-relaxed text-gray-800"
                   dangerouslySetInnerHTML={{ __html: processedLine }}
                 />
               </div>
@@ -240,7 +247,7 @@ const HtmlResultRenderer = memo(
           return (
             <p
               key={index}
-              className="leading-relaxed"
+              className="leading-relaxed text-gray-800"
               dangerouslySetInnerHTML={{ __html: processedLine }}
             />
           );
@@ -696,7 +703,7 @@ const DictionaryDetailModal = ({
             )}
             <span className="capitalize">{item.category}</span>
           </div>
-          
+           
           <HtmlResultRenderer
             result={item.explanation || item.translation || ''}
             activeMode={item.category}
