@@ -155,22 +155,32 @@ const ModeCard = ({
 const headerIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'simplified term': BookOpen,
   'everyday language explanation': MessageSquare,
-  analogy: Lightbulb,
+  'helpful analogy': Lightbulb,
   'what you should know': CheckCircle,
   'when to seek medical attention': AlertTriangle,
   'cultural understanding': Globe2,
   'communication bridge': MessageSquare,
   'family integration': Users,
+  'tradition + moden integration': BookOpen,
   'traditional + modern integration': HeartPulse,
-  'cultural advocacy': Users,
+  'cultural advocacy': MessageSquare,
   'common misunderstandings': Lightbulb,
+  'feeling about this word': Baby,
+  'what it is': BookMarked,
+  'why it happens': BookOpen,
+  'what to expect': BookMarked,
+  'how helpers help': CheckCircle,
+  'you are brave': HeartPulse,
+  'questions are okay':Lightbulb
 };
 
 // Component to render HTML result with icons
 const HtmlResultRenderer = memo(
   ({ result, activeMode }: { result: string; activeMode: string }) => {
-    // Only apply special formatting for medical and cultural modes
-    if (activeMode !== 'medical' && activeMode !== 'cultural') {
+    // UPDATED: Added 'kids' to the allowed modes for special formatting
+    const formattedModes = ['medical', 'cultural', 'kids'];
+    
+    if (!formattedModes.includes(activeMode)) {
       return (
         <div className="prose prose-sm max-w-none whitespace-pre-line text-gray-800">
           {result}
@@ -184,13 +194,14 @@ const HtmlResultRenderer = memo(
       <div className="space-y-2">
         {lines.map((line, index) => {
           // 1. Check for Headers
+          // We clean the line to match keys in headerIcons
           const cleanedLine = line
             .replace(/^(##\s*|\*\*\s*)/, '')
             .replace(/\s*\*\*$/, '')
+            .replace(/:$/, '') // Remove trailing colon if AI adds it
             .trim();
 
-          const Icon =
-            headerIcons[cleanedLine.toLowerCase().replace(/:$/, '').trim()];
+          const Icon = headerIcons[cleanedLine.toLowerCase()];
 
           if (Icon) {
             return (
@@ -205,7 +216,7 @@ const HtmlResultRenderer = memo(
 
           // 2. Check for Empty Lines
           if (line.trim() === '') {
-            return null;
+            return <div key={index} className="h-2" />; // Return small spacer instead of null
           }
 
           // 3. Process Paragraphs/Bullets
@@ -229,12 +240,7 @@ const HtmlResultRenderer = memo(
           if (isBullet) {
             return (
               <div key={index} className="flex items-start space-x-2 ml-4">
-                <span
-                  className="text-blue-600 flex-shrink-0"
-                  style={{ marginTop: '0.375rem' }}
-                >
-                  &bull;
-                </span>
+                <span className="text-blue-600 flex-shrink-0 mt-1.5">&bull;</span>
                 <p
                   className="leading-relaxed text-gray-800"
                   dangerouslySetInnerHTML={{ __html: processedLine }}
@@ -243,7 +249,6 @@ const HtmlResultRenderer = memo(
             );
           }
 
-          // 4. Render as regular paragraph
           return (
             <p
               key={index}
