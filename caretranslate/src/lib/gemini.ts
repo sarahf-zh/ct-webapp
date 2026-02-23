@@ -103,7 +103,7 @@ export const generateMedicalTranslation = async (
       systemInstruction: systemPrompt,
       generationConfig: {
         // Set a token limit (e.g., 500 tokens is ~375 words)
-        maxOutputTokens: 700,
+        maxOutputTokens: 750,
         temperature: 0.4
       }
     });
