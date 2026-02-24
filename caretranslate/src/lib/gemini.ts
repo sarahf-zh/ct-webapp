@@ -72,6 +72,7 @@ export const generateMedicalTranslation = async (
     Ensure your respponse adapts to a complexity level: ${options.complexityLevel}/5 (1=very simple, 5=very detailed).  
     
     INSTRUCTION: 
+    Be encouraging and reduce medical anxiety while being accurate. 
     Your response needs to strictly follow the requirements below:
       
     **Simplified Term**
@@ -92,12 +93,12 @@ export const generateMedicalTranslation = async (
     **When to Seek Medical Attention**
     When to seek medical attention
     
-    Be encouraging and reduce medical anxiety while being accurate. 
 
     STYLING: 
     Format your response with bullets when appropriate. Always use the asterisk (*) to start bullets.
     Use Markdown bolding for headers. No introductory "AI chatter" or concluding remarks. Start immediately with the first header.`;
     
+
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-flash-lite-latest',
       systemInstruction: systemPrompt,
@@ -139,23 +140,32 @@ export const generateCulturalTranslation = async (
     - Practices: ${culturalContext.traditionalPractices.join(', ')}
     - Barriers: ${culturalContext.commonBarriers}
 
-    INSTRUCTION: Provide a complete, professional clinical brief. 
-    To ensure the full response fits, follow these length constraints strictly:
-   
-    1. **Cultural Understanding**: (3 sentences) How is this health concern traditionally viewed in ${options.culturalBackground} culture? Reference specific cultural health concepts.
-
-    2. **Family Integration**: (3-4 sentences) How to navigate ${options.culturalBackground} family dynamics and decision-making processes in healthcare settings.
-
-    3. **Traditional + Modern Integration**: (3-4 sentences) How to respectfully discuss ${options.culturalBackground} traditional practices alongside modern medical treatment.
-
-    4. **Cultural Advocacy**: (3-4 sentences) Specific ways to advocate for culturally appropriate care while respecting medical expertise.
-
-    5. **Common Misunderstandings**: (3 sentences) Address typical misunderstandings between ${options.culturalBackground} patients and Western providers.
-
+    INSTRUCTION: 
+    Help a user navitage a given health topic using a cultural-aware lens. Use a respectufl and understanding tone.
     Be specific to ${options.culturalBackground} culture - use actual cultural terms, reference real practices, and provide concrete examples.
     
-    STYLING: Format your response with bullets when appropriate. Always use the asterisk (*) to start bullets.
-    Use Markdown bolding for headers. No introductory "AI chatter" or concluding remarks. Start immediately with the first header.`;
+    To ensure the full response fits, your response needs to follow these length constraints strictly:
+   
+    **Cultural Understanding** 
+    (3 sentences) How is this health topic traditionally viewed in ${options.culturalBackground} culture? Reference specific cultural health concepts.
+
+    **Family Integration** 
+    (3-4 sentences) How to navigate ${options.culturalBackground} family dynamics and decision-making processes in healthcare settings.
+
+    **Traditional + Modern Integration** 
+    (3-4 sentences) How to respectfully discuss ${options.culturalBackground} traditional practices alongside modern medical treatment.
+
+    **Cultural Advocacy** 
+    (3-4 sentences) Specific ways to advocate for culturally appropriate care while respecting medical expertise.
+
+    **Common Misunderstandings** 
+    (3 sentences) Address typical misunderstandings between ${options.culturalBackground} patients and Western providers.
+
+    
+    STYLING: 
+    Format your response with bullets when appropriate. Always use the asterisk (*) to start bullets.
+    Use Markdown bolding for headers. No introductory "AI chatter" or concluding remarks. Start immediately with the first header`;
+
 
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-flash-lite-latest',
@@ -217,7 +227,10 @@ export const generateKidsTranslation = async (
     **Questions Are Okay**
     An invitation to ask more.
 
-    STYLING: Use Markdown bolding for headers. No introductory "AI chatter" or concluding remarks. Start immediately with the first header.`;
+    STYLING: Use Markdown bolding for headers. 
+    No introductory "AI chatter" or concluding remarks. Start immediately with the first header.`;
+
+    
 
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-flash-lite-latest',
