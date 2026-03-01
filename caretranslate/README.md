@@ -46,9 +46,6 @@
 - Multiple language support
 - Accessibility-focused design
 
-## 🚀 Live Demo
-
-🌐 **[Try CareTranslate Live](https://caretranslate.vercel.app)** *(Replace with your actual URL)*
 
 ## 📸 Screenshots
 <div align="center">
